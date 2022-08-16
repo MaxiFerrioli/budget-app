@@ -36,17 +36,32 @@ exports.getOperation = (req, res, next) => {
 
 exports.deleteOperation = (req, res, next) => {
   const { operationId } = req.params;
-  Operation.findByPk(operationId).then((operation) => {
-    operation.destroy();
-    res.status(200).json({
-      operation,
-      message: "operation deleted",
-    });
-  });
+  Operation.findByPk(operationId)
+    .then((operation) => {
+      operation.destroy();
+      res.status(200).json({
+        operation,
+        message: "operation deleted",
+      });
+    })
+    .catch((err) => next(err));
 };
 
-exports.addOperation = (req, res, next) => {
-  res.send("Add");
+exports.addOperation = async (req, res, next) => {
+  const { concept, amount, date, type_id } = req.body;
+  Operation.create({
+    concept,
+    amount,
+    date,
+    type_id,
+  })
+    .then((operation) => {
+      res.status(201).json({
+        operation,
+        message: "add operation",
+      });
+    })
+    .catch((err) => next(err));
 };
 
 exports.updateOperation = (req, res, next) => {
