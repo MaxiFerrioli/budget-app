@@ -12,9 +12,13 @@ exports.getAllOperations = async (req, res, next) => {
 };
 
 exports.getOperations = (req, res, next) => {
-  Operation.findAll({})
-    .then(() => {
+  Operation.findAll({
+    limit: parseInt(req.params.quantity),
+    order: [["date", "DESC"]],
+  })
+    .then((operations) => {
       res.status(200).json({
+        operations,
         messege: "get operations",
       });
     })
@@ -30,6 +34,10 @@ exports.getOperation = (req, res, next) => {
         error.statusCode = 404;
         next(error);
       }
+      res.status(200).json({
+        operation,
+        message: "Fetched operation successfuly",
+      });
     })
     .catch((err) => next(err));
 };
