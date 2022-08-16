@@ -4,9 +4,9 @@ const router = express.Router();
 
 router.get("/list", operationController.getAllOperation);
 router.get("/", operationController.getOperations);
-router.get("/", operationController.getOperation);
+router.get("/:operationId", operationController.getOperation);
 router.post("/", operationController.addOperation);
-router.patch("/", operationController.updateOperation);
-router.delete("/", operationController.deleteOperation);
+router.patch("/:operationId", operationController.updateOperation);
+router.delete("/:operationId", operationController.deleteOperation);
 
 module.exports = router;
