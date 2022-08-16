@@ -9,9 +9,7 @@ app.get("/", (req, res) => {
 
 app.use((req, res, next) => {
   const error = new Error("Not found");
-
   error.status = 404;
-
   next(error);
 });
 
@@ -19,13 +17,10 @@ app.use("/operation", operationRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);
-
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;
-
   res.status(status).json({ message: message, data: data });
-
   next(error);
 });
 
