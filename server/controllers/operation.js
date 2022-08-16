@@ -73,5 +73,22 @@ exports.addOperation = async (req, res, next) => {
 };
 
 exports.updateOperation = (req, res, next) => {
-  res.send("Update");
+  const { operationId } = req.params;
+  const { concept, amount, date } = req.body;
+
+  Operation.findByPk(operationId)
+    .then((operation) => {
+      operation.concept = concept;
+      operation.amount = amount;
+      operation.date = date;
+      operation
+        .then(() => {
+          res.status(200).json({
+            message: "Operation updated successfuly",
+            operation,
+          });
+        })
+        .catch((err) => next(err));
+    })
+    .catch((err) => next(err));
 };
