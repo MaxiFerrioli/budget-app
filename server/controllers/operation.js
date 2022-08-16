@@ -1,17 +1,24 @@
 const Operation = require("../models/operation");
 
-exports.getOperation = (req, res, next) => {
-  Operation.findAll({}).then(() => {
-    res.status(200).json({ operations, messege: "get operation" });
-  });
-  res.send("get operation");
+exports.getAllOperations = async (req, res, next) => {
+  Operation.findAll({ order: [["date", "DESC"]] })
+    .then((operations) => {
+      res.status(200).json({
+        operations,
+        message: "successful process",
+      });
+    })
+    .catch((err) => next(err));
 };
 
-exports.getOperation = (req, res, next) => {
-  Operation.findAll({}).then(() => {
-    res.status(200).json({ operations, messege: "get operation" });
-  });
-  res.send("get operation");
+exports.getOperations = (req, res, next) => {
+  Operation.findAll({})
+    .then(() => {
+      res.status(200).json({
+        messege: "get operations",
+      });
+    })
+    .catch((err) => next(err));
 };
 
 exports.addOperation = (req, res, next) => {
