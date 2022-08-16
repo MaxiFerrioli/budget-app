@@ -28,10 +28,21 @@ exports.getOperation = (req, res, next) => {
       if (!operation) {
         const error = new Error("NOT FOUND");
         error.statusCode = 404;
-        next();
+        next(error);
       }
     })
     .catch((err) => next(err));
+};
+
+exports.deleteOperation = (req, res, next) => {
+  const { operationId } = req.params;
+  Operation.findByPk(operationId).then((operation) => {
+    operation.destroy();
+    res.status(200).json({
+      operation,
+      message: "operation deleted",
+    });
+  });
 };
 
 exports.addOperation = (req, res, next) => {
@@ -40,8 +51,4 @@ exports.addOperation = (req, res, next) => {
 
 exports.updateOperation = (req, res, next) => {
   res.send("Update");
-};
-
-exports.deleteOperation = (req, res, next) => {
-  res.send("Delete");
 };
