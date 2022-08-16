@@ -5,7 +5,7 @@ exports.getAllOperations = async (req, res, next) => {
     .then((operations) => {
       res.status(200).json({
         operations,
-        message: "successful process",
+        message: "get all operations",
       });
     })
     .catch((err) => next(err));
@@ -17,6 +17,19 @@ exports.getOperations = (req, res, next) => {
       res.status(200).json({
         messege: "get operations",
       });
+    })
+    .catch((err) => next(err));
+};
+
+exports.getOperation = (req, res, next) => {
+  const { operationId } = req.params;
+  Operation.findByPk(operationId)
+    .then((operation) => {
+      if (!operation) {
+        const error = new Error("NOT FOUND");
+        error.statusCode = 404;
+        next();
+      }
     })
     .catch((err) => next(err));
 };
