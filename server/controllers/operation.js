@@ -78,10 +78,16 @@ exports.updateOperation = (req, res, next) => {
 
   Operation.findByPk(operationId)
     .then((operation) => {
+      if (!operation) {
+        const error = new Error("the operation was not found");
+        error.statusCode = 404;
+        next(error);
+      }
       operation.concept = concept;
       operation.amount = amount;
       operation.date = date;
       operation
+        .save()
         .then(() => {
           res.status(200).json({
             message: "Operation updated successfuly",
