@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 4000;
 const operationRoutes = require("./routes/operation");
+
 require("dotenv").config();
+
 var cors = require("cors");
 
 app.use(express.json());
@@ -28,6 +29,8 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message, data: data });
   next(error);
 });
+
+const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
   console.log(`app corriendo en http://localhost:${port}`);
