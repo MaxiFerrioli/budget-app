@@ -1,24 +1,24 @@
-const express = require('express');
-require('dotenv').config();
+const express = require("express");
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 4000;
 
-var cors = require('cors');
+var cors = require("cors");
 app.use(cors());
 
-const operationRoutes = require('./routes/operation');
+const operationRoutes = require("./routes/operation");
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Personal Budget');
+app.get("/", (req, res) => {
+  res.send("Funciona");
 });
 
-app.use('/operation', operationRoutes);
+app.use("/operation", operationRoutes);
 
 app.use((req, res, next) => {
-  const error = new Error('Not found');
+  const error = new Error("Not found");
   error.status = 404;
   next(error);
 });
