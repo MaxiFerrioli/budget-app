@@ -1,25 +1,27 @@
-const express = require("express");
+const express = require('express');
+require('dotenv').config();
+
 const app = express();
-const operationRoutes = require("./routes/operation");
+const port = process.env.PORT || 4000;
 
-require("dotenv").config();
-
-var cors = require("cors");
-
-app.use(express.json());
+var cors = require('cors');
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("APP CORRIENDO");
+const operationRoutes = require('./routes/operation');
+
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('Personal Budget');
 });
 
+app.use('/operation', operationRoutes);
+
 app.use((req, res, next) => {
-  const error = new Error("Not found");
+  const error = new Error('Not found');
   error.status = 404;
   next(error);
 });
-
-app.use("/operation", operationRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);
@@ -27,11 +29,8 @@ app.use((error, req, res, next) => {
   const message = error.message;
   const data = error.data;
   res.status(status).json({ message: message, data: data });
-  next(error);
 });
 
-const port = process.env.PORT || 4000;
-
 app.listen(port, () => {
-  console.log(`app corriendo en http://localhost:${port}`);
+  console.log(`Personal Budget app listening at http://localhost:${port}`);
 });
