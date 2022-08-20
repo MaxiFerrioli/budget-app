@@ -1,7 +1,7 @@
 import { useState } from "react";
 import OperationForm from "../Operations/Form/OperationForm";
 
-const Operation = () => {
+const Operations = () => {
   const [operations, setOperations] = useState([]);
 
   const addOperationHandler = (operation) => {
@@ -26,4 +26,4 @@ const Operation = () => {
     </div>
   );
 };
-export default Operation;
+export default Operations;
