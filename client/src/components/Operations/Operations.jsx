@@ -13,7 +13,7 @@ const Operations = () => {
     let filtered;
     if (selectedType) {
       filtered = operations.filter(
-        (operation) => operation.type === selectedType
+        (operation) => operation.type_id === selectedType
       );
     } else {
       filtered = [...operations];
@@ -39,7 +39,7 @@ const Operations = () => {
   return (
     <div>
       <OperationForm onSaveOperation={addOperationHandler} />
-      <Title />
+      <Title>ALL OPERATIONS</Title>
       <OperationsFilters
         onShowExpenses={showExpenses}
         onShowIncomes={showIncomes}
