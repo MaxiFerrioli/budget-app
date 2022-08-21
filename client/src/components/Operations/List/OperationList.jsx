@@ -1,5 +1,8 @@
 import Item from "../../Item/Item";
 import moment from "moment";
+import { FiEdit } from "react-icons/fi";
+import { BsTrash } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const types = [
   { id: 1, name: "income" },
@@ -24,6 +27,14 @@ const OperationsList = ({ operations }) => {
             <div>
               <div>{moment(operation.date).format("DD/MM/YYYY")}</div>
               <div>{getTypeName(operation.type_id)}</div>
+            </div>
+            <div>
+              <div>
+                <Link to={`/operation/edit/${operation.id}`}>
+                  <FiEdit />
+                </Link>
+                <BsTrash />
+              </div>
             </div>
           </div>
         </Item>
