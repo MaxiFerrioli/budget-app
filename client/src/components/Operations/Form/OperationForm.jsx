@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Item from "../../Item/Item";
+import moment from "moment";
 
 const OperationForm = ({ onSaveOperation, operation = null, title }) => {
   const [enteredConcept, setEnteredConcept] = useState("");
@@ -41,7 +42,8 @@ const OperationForm = ({ onSaveOperation, operation = null, title }) => {
   };
 
   const dateHandler = (event) => {
-    setEnteredDate(event.target.value);
+    const date = moment(event.target.value).format("YYYY-MM-DD");
+    setEnteredDate(date);
   };
 
   const clearHandler = () => {
@@ -63,9 +65,11 @@ const OperationForm = ({ onSaveOperation, operation = null, title }) => {
     };
     if (isEditing) {
       savedOperation.id = operation.id;
+    } else {
+      clearHandler();
     }
+
     onSaveOperation(savedOperation);
-    clearHandler();
   };
 
   return (
@@ -85,15 +89,26 @@ const OperationForm = ({ onSaveOperation, operation = null, title }) => {
             max="2023-01-01"
           />
           <label>Type</label>
-          <select value={enteredType} onChange={typeHandler}>
+          <select
+            value={enteredType}
+            onChange={typeHandler}
+            disabled={isEditing}
+          />
+          <select
+            value={enteredType}
+            onChange={typeHandler}
+            disabled={isEditing}
+          >
             <option value="0">Select an option</option>
             <option value="1">Income</option>
             <option value="2">Expense</option>
           </select>
           <div>
-            <button type="button" onClick={clearHandler}>
-              Clear
-            </button>
+            {!isEditing && (
+              <button type="button" onClick={clearHandler}>
+                Clear
+              </button>
+            )}
             <button type="submit" disabled={!isFormReady}>
               Save
             </button>
