@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
-import OperationForm from "../Operations/Form/OperationForm";
-import Title from "../Title/Title";
-import OperationsFilters from "./Filter/OperationFilter";
+import { useEffect, useState } from "react";
+import OperationForm from "./Form/OperationForm";
 import OperationsList from "./List/OperationList";
+import OperationsFilters from "./Filter/OperationFilter";
+import SectionTitle from "../Title/Title";
 import {
-  getAllOperations,
   addNewOperation,
+  getAllOperations,
   deleteOperation,
 } from "../../services/services";
 
 const Operations = () => {
-  const [selectedType, setSelectedType] = useState();
   const [operations, setOperations] = useState([]);
+  const [selectedType, setSelectedType] = useState();
   const [filteredOperations, setFilteredOperations] = useState([]);
 
   useEffect(() => {
@@ -21,21 +21,6 @@ const Operations = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-
-  const deleteHandler = (id) => {
-    deleteOperation(id)
-      .then(() => {
-        setOperations((prevOperations) => {
-          const deletedIndex = prevOperations.findIndex(
-            (operation) => operation.id === id
-          );
-          const newOperations = [...prevOperations];
-          newOperations.splice(deletedIndex, 1);
-          setOperations(newOperations);
-        });
-      })
-      .catch((error) => console.log(error));
-  };
 
   useEffect(() => {
     let filtered;
@@ -48,10 +33,26 @@ const Operations = () => {
     }
     setFilteredOperations(filtered);
   }, [operations, selectedType]);
+
   const addOperationHandler = (operation) => {
     addNewOperation(operation)
-      .then((data) => {
+      .then(({ data }) => {
         setOperations((prevOperations) => [data.operation, ...prevOperations]);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const deleteOperationHandler = (id) => {
+    deleteOperation(id)
+      .then(() => {
+        setOperations((prevOperations) => {
+          const deletedIndex = prevOperations.findIndex(
+            (operation) => operation.id === id
+          );
+          const newOperations = [...prevOperations];
+          newOperations.splice(deletedIndex, 1);
+          setOperations(newOperations);
+        });
       })
       .catch((error) => console.log(error));
   };
@@ -69,12 +70,12 @@ const Operations = () => {
   };
 
   return (
-    <div>
+    <>
       <OperationForm
         onSaveOperation={addOperationHandler}
-        title="add operation"
+        title="Add Operation"
       />
-      <Title>ALL OPERATIONS</Title>
+      <SectionTitle>All operations</SectionTitle>
       <OperationsFilters
         onShowExpenses={showExpenses}
         onShowIncomes={showIncomes}
@@ -82,9 +83,11 @@ const Operations = () => {
       />
       <OperationsList
         operations={filteredOperations}
-        onDeleteOperation={deleteHandler}
+        onDeleteOperation={deleteOperationHandler}
+        showActions
       />
-    </div>
+    </>
   );
 };
+
 export default Operations;

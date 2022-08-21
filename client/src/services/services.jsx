@@ -16,9 +16,9 @@ export const getOperation = (id) => {
   }
 };
 
-export const addNewOperation = (operation) => {
+export const getLatestOperations = (quantity) => {
   try {
-    return axios.post(`http://localhost:4000/operation/`, { ...operation });
+    return axios.get(`http://localhost:4000/operation/limit/${quantity}`);
   } catch (error) {
     console.log(error);
   }
@@ -27,6 +27,14 @@ export const addNewOperation = (operation) => {
 export const getOperationsBalance = () => {
   try {
     return axios.get(`http://localhost:4000/operation/balance`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addNewOperation = (operation) => {
+  try {
+    return axios.post(`http://localhost:4000/operation/`, { ...operation });
   } catch (error) {
     console.log(error);
   }
@@ -45,14 +53,6 @@ export const editOperation = ({ id, ...operation }) => {
 export const deleteOperation = (id) => {
   try {
     return axios.delete(`http://localhost:4000/operation/${id}`);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const getLatestOperations = (quantity) => {
-  try {
-    return axios.get(`http://localhost:4000/operation/${quantity}`);
   } catch (error) {
     console.log(error);
   }
