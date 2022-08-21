@@ -1,5 +1,10 @@
-function Item() {
-  return <div>IM Item!!!!!</div>;
-}
+const Item = ({ children, title }) => {
+  return (
+    <div>
+      {title && <div>{title}</div>}
+      {children}
+    </div>
+  );
+};
 
-export default Card;
+export default Item;
