@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getOperation, editOperation } from "../../services/services";
 import OperationForm from "../Operations/Form/OperationForm";
 
 const OperationEdit = () => {
   const [operation, setOperation] = useState({});
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getOperation(id)
@@ -17,8 +18,8 @@ const OperationEdit = () => {
 
   const saveOperation = (editedOperation) => {
     editOperation(editedOperation)
-      .then(({ data }) => {
-        setOperation(data.operation);
+      .then(() => {
+        navigate("/operations");
       })
       .catch((error) => console.log(error));
   };
