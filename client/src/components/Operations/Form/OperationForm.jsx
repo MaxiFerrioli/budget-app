@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Item from "../../Item/Item";
 
 const OperationForm = ({ onSaveOperation }) => {
@@ -6,6 +6,16 @@ const OperationForm = ({ onSaveOperation }) => {
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
   const [enteredType, setEnteredType] = useState(0);
+
+  const [isFormReady, setIsFormReady] = useState(false);
+
+  useEffect(() => {
+    if (enteredConcept && enteredAmount && enteredDate && enteredType) {
+      setIsFormReady(true);
+    } else {
+      setIsFormReady(false);
+    }
+  }, [enteredConcept, enteredAmount, enteredDate, enteredType]);
 
   const amountHandler = (event) => {
     setEnteredAmount(event.target.value);
@@ -16,7 +26,7 @@ const OperationForm = ({ onSaveOperation }) => {
   };
 
   const typeHandler = (event) => {
-    setEnteredType(event.target.value);
+    setEnteredType(+event.target.value);
   };
 
   const dateHandler = (event) => {
@@ -28,6 +38,7 @@ const OperationForm = ({ onSaveOperation }) => {
     setEnteredAmount("");
     setEnteredDate("");
     setEnteredType(0);
+    setIsFormReady(false);
   };
 
   const submitHandler = (event) => {
@@ -69,7 +80,9 @@ const OperationForm = ({ onSaveOperation }) => {
             <button type="button" onClick={clearHandler}>
               Clear
             </button>
-            <button type="submit">Save</button>
+            <button type="submit" disabled={!isFormReady}>
+              Save
+            </button>
           </div>
         </form>
       </Item>
