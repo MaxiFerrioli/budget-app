@@ -1,4 +1,5 @@
 const Operation = require("../models/operation");
+const sequelize = require("../db");
 
 exports.getAllOperations = async (req, res, next) => {
   Operation.findAll({ order: [["date", "DESC"]] })
@@ -97,4 +98,30 @@ exports.updateOperation = (req, res, next) => {
         .catch((err) => next(err));
     })
     .catch((err) => next(err));
+};
+
+exports.getOperationsBalance = async (req, res, next) => {
+  try {
+    const incomes = await Operation.findAll({
+      where: {
+        type_id: 1,
+      },
+      attributes: [[sequelize.fn("sum", sequelize.col("amount")), "total"]],
+      raw: true,
+    });
+    const expenses = await Operation.findAll({
+      where: {
+        type_id: 2,
+      },
+      attributes: [[sequelize.fn("sum", sequelize.col("amount")), "total"]],
+      raw: true,
+    });
+    const balance = incomes[0].total - expenses[0].total;
+    res.status(200).json({
+      total: balance,
+      message: "Fetched balance successfuly",
+    });
+  } catch (err) {
+    next(err);
+  }
 };
