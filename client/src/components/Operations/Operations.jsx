@@ -1,20 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import OperationForm from "../Operations/Form/OperationForm";
 import Title from "../Title/Title";
 import OperationsList from "./List/OperationList";
 
 const Operations = () => {
+  const [selectedType, setSelectedType] = useState();
   const [operations, setOperations] = useState([]);
+  const [filteredOperations, setFilteredOperations] = useState([]);
+
+  useEffect(() => {
+    let filtered;
+    if (selectedType) {
+      filtered = operations.filter(
+        (operation) => operation.type === selectedType
+      );
+    } else {
+      filtered = [...operations];
+    }
+    setFilteredOperations(filtered);
+  }, [operations, selectedType]);
 
   const addOperationHandler = (operation) => {
     setOperations((prevOperations) => [operation, ...prevOperations]);
+  };
+  const showExpenses = () => {
+    setSelectedType(2);
+  };
+
+  const showIncomes = () => {
+    setSelectedType(1);
+  };
+
+  const clearFilter = () => {
+    setSelectedType(null);
   };
 
   return (
     <div>
       <OperationForm onSaveOperation={addOperationHandler} />
       <Title />
-      <OperationsList operations={operations} />
+      <OperationsList
+        operations={filteredOperations}
+        onShowExpenses={showExpenses}
+        onShowIncomes={showIncomes}
+        onClearFilter={clearFilter}
+      />
     </div>
   );
 };
