@@ -14,7 +14,7 @@ const OperationsList = ({ operations }) => {
   return (
     <>
       {operations.map((operation) => (
-        <Item>
+        <Item key={operation.id}>
           <div>
             <div>
               <div>{operation.concept}</div>
