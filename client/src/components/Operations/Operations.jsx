@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import OperationForm from "../Operations/Form/OperationForm";
 import Title from "../Title/Title";
+import OperationsFilters from "./Filter/OperationFilter";
 import OperationsList from "./List/OperationList";
 
 const Operations = () => {
@@ -39,12 +40,12 @@ const Operations = () => {
     <div>
       <OperationForm onSaveOperation={addOperationHandler} />
       <Title />
-      <OperationsList
-        operations={filteredOperations}
+      <OperationsFilters
         onShowExpenses={showExpenses}
         onShowIncomes={showIncomes}
         onClearFilter={clearFilter}
       />
+      <OperationsList operations={filteredOperations} />
     </div>
   );
 };

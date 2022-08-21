@@ -5,12 +5,7 @@ const types = [
   { code: 2, name: "expense" },
 ];
 
-const OperationsList = ({
-  operations,
-  onShowExpenses,
-  onShowIncomes,
-  onClearFilter,
-}) => {
+const OperationsList = ({ operations }) => {
   const getTypeName = (operationType) => {
     const type = types.find((type) => type.code === operationType);
     return type.name;
@@ -18,11 +13,6 @@ const OperationsList = ({
 
   return (
     <>
-      <div>
-        <button onClick={onShowIncomes}>Incomes</button>
-        <button onClick={onShowExpenses}>Expenses</button>
-      </div>
-      <button onClick={onClearFilter}>Clear filter</button>
       {operations.map((operation) => (
         <Item>
           <div>
