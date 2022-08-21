@@ -9,7 +9,7 @@ const types = [
   { id: 2, name: "expense" },
 ];
 
-const OperationsList = ({ operations }) => {
+const OperationsList = ({ operations, onDeleteOperation }) => {
   const getTypeName = (operationType) => {
     const type = types.find((type) => type.id === operationType);
     return type.name;
@@ -33,7 +33,7 @@ const OperationsList = ({ operations }) => {
                 <Link to={`/operation/edit/${operation.id}`}>
                   <FiEdit />
                 </Link>
-                <BsTrash />
+                <BsTrash onClick={() => onDeleteOperation(operation.id)} />
               </div>
             </div>
           </div>

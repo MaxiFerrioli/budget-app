@@ -3,7 +3,11 @@ import OperationForm from "../Operations/Form/OperationForm";
 import Title from "../Title/Title";
 import OperationsFilters from "./Filter/OperationFilter";
 import OperationsList from "./List/OperationList";
-import { getAllOperations, addNewOperation } from "../../services/services";
+import {
+  getAllOperations,
+  addNewOperation,
+  deleteOperation,
+} from "../../services/services";
 
 const Operations = () => {
   const [selectedType, setSelectedType] = useState();
@@ -17,6 +21,21 @@ const Operations = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  const deleteHandler = (id) => {
+    deleteOperation(id)
+      .then(() => {
+        setOperations((prevOperations) => {
+          const deletedIndex = prevOperations.findIndex(
+            (operation) => operation.id === id
+          );
+          const newOperations = [...prevOperations];
+          newOperations.splice(deletedIndex, 1);
+          setOperations(newOperations);
+        });
+      })
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     let filtered;
@@ -61,7 +80,10 @@ const Operations = () => {
         onShowIncomes={showIncomes}
         onClearFilter={clearFilter}
       />
-      <OperationsList operations={filteredOperations} />
+      <OperationsList
+        operations={filteredOperations}
+        onDeleteOperation={deleteHandler}
+      />
     </div>
   );
 };
