@@ -1,5 +1,7 @@
 import { useState } from "react";
 import OperationForm from "../Operations/Form/OperationForm";
+import Title from "../Title/Title";
+import OperationsList from "./List/OperationList";
 
 const Operations = () => {
   const [operations, setOperations] = useState([]);
@@ -8,21 +10,11 @@ const Operations = () => {
     setOperations((prevOperations) => [operation, ...prevOperations]);
   };
 
-  const operationsRender = (
-    <div>
-      {operations.map((operation) => (
-        <div>
-          concept: {operation.concept}, amount: {operation.amount}, date:{" "}
-          {operation.date.toString()}, type: {operation.type}
-        </div>
-      ))}
-    </div>
-  );
-
   return (
     <div>
       <OperationForm onSaveOperation={addOperationHandler} />
-      {operationsRender}
+      <Title />
+      <OperationsList operations={operations} />
     </div>
   );
 };
