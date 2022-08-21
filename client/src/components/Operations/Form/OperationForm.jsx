@@ -61,14 +61,13 @@ const OperationForm = ({ onSaveOperation, operation = null, title }) => {
       concept: enteredConcept,
       amount: +enteredAmount,
       date: new Date(enteredDate),
-      type: enteredType,
+      type_id: enteredType,
     };
     if (isEditing) {
       savedOperation.id = operation.id;
     } else {
       clearHandler();
     }
-
     onSaveOperation(savedOperation);
   };
 
