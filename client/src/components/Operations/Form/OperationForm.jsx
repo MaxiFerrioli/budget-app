@@ -73,7 +73,7 @@ const OperationForm = ({ onSaveOperation, operation = null, title }) => {
 
   return (
     <div>
-      <Item title="ADD OPERATION">
+      <Item title={title}>
         <form onSubmit={submitHandler}>
           <label>Concept</label>
           <input type="text" value={enteredConcept} onChange={conceptHandler} />
