@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Item from "../../Item/Item";
 
 const OperationForm = ({ onSaveOperation }) => {
   const [enteredConcept, setEnteredConcept] = useState("");
@@ -44,33 +45,34 @@ const OperationForm = ({ onSaveOperation }) => {
 
   return (
     <div>
-      <div>Add Operation</div>
-      <form onSubmit={submitHandler}>
-        <label>Concept</label>
-        <input type="text" value={enteredConcept} onChange={conceptHandler} />
-        <label>Amount</label>
-        <input type="text" value={enteredAmount} onChange={amountHandler} />
-        <label>Date</label>
-        <input
-          type="date"
-          value={enteredDate}
-          onChange={dateHandler}
-          min="2020-01-01"
-          max="2023-01-01"
-        />
-        <label>Type</label>
-        <select value={enteredType} onChange={typeHandler}>
-          <option value="0">Select an option</option>
-          <option value="1">Income</option>
-          <option value="2">Expense</option>
-        </select>
-        <div>
-          <button type="button" onClick={clearHandler}>
-            Clear
-          </button>
-          <button type="submit">Save</button>
-        </div>
-      </form>
+      <Item title="ADD OPERATION">
+        <form onSubmit={submitHandler}>
+          <label>Concept</label>
+          <input type="text" value={enteredConcept} onChange={conceptHandler} />
+          <label>Amount</label>
+          <input type="text" value={enteredAmount} onChange={amountHandler} />
+          <label>Date</label>
+          <input
+            type="date"
+            value={enteredDate}
+            onChange={dateHandler}
+            min="2020-01-01"
+            max="2023-01-01"
+          />
+          <label>Type</label>
+          <select value={enteredType} onChange={typeHandler}>
+            <option value="0">Select an option</option>
+            <option value="1">Income</option>
+            <option value="2">Expense</option>
+          </select>
+          <div>
+            <button type="button" onClick={clearHandler}>
+              Clear
+            </button>
+            <button type="submit">Save</button>
+          </div>
+        </form>
+      </Item>
     </div>
   );
 };
