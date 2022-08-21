@@ -13,10 +13,7 @@ const Operations = () => {
   useEffect(() => {
     getAllOperations()
       .then(({ data }) => {
-        const allOperations = data.operations.map((operation) => {
-          return { ...operation, date: new Date(operation.date) };
-        });
-        setOperations(allOperations);
+        setOperations(data.operations);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -32,7 +29,6 @@ const Operations = () => {
     }
     setFilteredOperations(filtered);
   }, [operations, selectedType]);
-
   const addOperationHandler = (operation) => {
     addNewOperation(operation)
       .then(() => {
@@ -57,8 +53,8 @@ const Operations = () => {
     <div>
       <OperationForm
         onSaveOperation={addOperationHandler}
-        title="Add Operation"
-      />{" "}
+        title="add operation"
+      />
       <Title>ALL OPERATIONS</Title>
       <OperationsFilters
         onShowExpenses={showExpenses}

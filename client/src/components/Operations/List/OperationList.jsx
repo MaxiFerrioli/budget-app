@@ -1,4 +1,5 @@
 import Item from "../../Item/Item";
+import moment from "moment";
 
 const types = [
   { id: 1, name: "income" },
@@ -21,6 +22,7 @@ const OperationsList = ({ operations }) => {
               <div>${operation.amount}</div>
             </div>
             <div>
+              <div>{moment(operation.date).format("DD/MM/YYYY")}</div>
               <div>{getTypeName(operation.type_id)}</div>
             </div>
           </div>
