@@ -55,7 +55,10 @@ const Operations = () => {
 
   return (
     <div>
-      <OperationForm onSaveOperation={addOperationHandler} />
+      <OperationForm
+        onSaveOperation={addOperationHandler}
+        title="Add Operation"
+      />{" "}
       <Title>ALL OPERATIONS</Title>
       <OperationsFilters
         onShowExpenses={showExpenses}

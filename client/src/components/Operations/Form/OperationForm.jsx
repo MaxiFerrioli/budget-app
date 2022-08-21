@@ -1,13 +1,24 @@
 import { useState, useEffect } from "react";
 import Item from "../../Item/Item";
 
-const OperationForm = ({ onSaveOperation }) => {
+const OperationForm = ({ onSaveOperation, operation = null, title }) => {
   const [enteredConcept, setEnteredConcept] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
   const [enteredType, setEnteredType] = useState(0);
-
   const [isFormReady, setIsFormReady] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (operation && operation.id) {
+      setEnteredConcept(operation.concept);
+      setEnteredAmount(operation.amount);
+      setEnteredDate(operation.date);
+      setEnteredType(operation.type_id);
+      setIsFormReady(true);
+      setIsEditing(true);
+    }
+  }, [operation]);
 
   useEffect(() => {
     if (enteredConcept && enteredAmount && enteredDate && enteredType) {
@@ -44,13 +55,16 @@ const OperationForm = ({ onSaveOperation }) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const operation = {
+    const savedOperation = {
       concept: enteredConcept,
       amount: +enteredAmount,
       date: new Date(enteredDate),
       type: enteredType,
     };
-    onSaveOperation(operation);
+    if (isEditing) {
+      savedOperation.id = operation.id;
+    }
+    onSaveOperation(savedOperation);
     clearHandler();
   };
 
