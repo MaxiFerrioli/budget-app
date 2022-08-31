@@ -21,6 +21,9 @@ const Home = () => {
         setOperations(latestOperations);
       })
       .catch((error) => console.log(error));
+  }, []);
+  
+  useEffect(() => {
     getOperationsBalance()
       .then(({ data }) => {
         setBalance(data.total);

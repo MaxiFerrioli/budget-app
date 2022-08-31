@@ -1,5 +1,13 @@
 import axios from "axios";
 
+export const getOperationsBalance = () => {
+  try {
+    return axios.get(`http://localhost:4000/operation/balance`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getAllOperations = () => {
   try {
     return axios.get(`http://localhost:4000/operation/`);
@@ -24,13 +32,6 @@ export const getLatestOperations = (quantity) => {
   }
 };
 
-export const getOperationsBalance = () => {
-  try {
-    return axios.get(`http://localhost:4000/operation/balance`);
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export const addNewOperation = (operation) => {
   try {
