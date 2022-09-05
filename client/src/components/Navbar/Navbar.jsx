@@ -7,10 +7,12 @@ import "./Navbar.css";
 
 const Navigate = () => {
   return (
-    <div>
-      <Navbar bg="secondary" expand="md" className="mb-3">
+    <div className="containerNav">
+      <Navbar expand="md" className="mb-3">
         <Container fluid>
-          <Navbar.Brand href="#">Budget app</Navbar.Brand>
+          <NavLink className="pe-3" exact={true} to="/">
+            Budget App
+          </NavLink>{" "}
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-lg`}
@@ -23,7 +25,7 @@ const Navigate = () => {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Nav className="justify-content-end pl-5 flex-grow-1 pe-3">
+              <Nav className="justify-content-end pl-5 flex-grow-1 pe-3 navOffCanvas">
                 <NavLink className="pe-3" exact={true} to="/">
                   Home
                 </NavLink>{" "}

@@ -1,6 +1,19 @@
-a {
+.containerNav {
+  background-color: rgb(53, 164, 255);
+}
+
+.containerNav a {
   text-decoration: none;
   box-shadow: none;
   color: black;
-  list-style: none;
+}
+
+.containerNav a:hover {
+  color: black;
+}
+
+.navOffCanvas a {
+  text-decoration: none;
+  box-shadow: none;
+  color: black;
 }
