@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import Item from "../../Item/Item";
 import moment from "moment";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import "./OperationForm.css";
 
-const OperationForm = ({ onSaveOperation, operation = null, title }) => {
+const OperationForm = ({ onSaveOperation, operation = null }) => {
   const [enteredConcept, setEnteredConcept] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
@@ -73,47 +75,66 @@ const OperationForm = ({ onSaveOperation, operation = null, title }) => {
 
   return (
     <div>
-      <Item title={title}>
-        <form onSubmit={submitHandler}>
-          <label>Concept</label>
-          <input type="text" value={enteredConcept} onChange={conceptHandler} />
-          <label>Amount</label>
-          <input type="text" value={enteredAmount} onChange={amountHandler} />
-          <label>Date</label>
-          <input
-            type="date"
-            value={enteredDate}
-            onChange={dateHandler}
-            min="2020-01-01"
-            max="2023-01-01"
-          />
-          <label>Type</label>
-          <select
-            value={enteredType}
-            onChange={typeHandler}
-            disabled={isEditing}
-          />
-          <select
-            value={enteredType}
-            onChange={typeHandler}
-            disabled={isEditing}
-          >
-            <option value="0">Select an option</option>
-            <option value="1">Income</option>
-            <option value="2">Expense</option>
-          </select>
+      <h2 className="title">ADD OPERATIONS</h2>
+      <Form onSubmit={submitHandler} className="containerForm">
+        <div className="Form">
           <div>
-            {!isEditing && (
-              <button type="button" onClick={clearHandler}>
-                Clear
-              </button>
-            )}
-            <button type="submit" disabled={!isFormReady}>
-              Save
-            </button>
+            <Form.Group className="mb-1" controlId="formBasicEmail">
+              <Form.Label>Concept</Form.Label>
+              <Form.Control
+                type="text"
+                value={enteredConcept}
+                onChange={conceptHandler}
+              />
+            </Form.Group>
+            <Form.Group className="mb-1" controlId="formBasicEmail">
+              <Form.Label>Amount</Form.Label>
+              <Form.Control
+                type="number"
+                value={enteredAmount}
+                onChange={amountHandler}
+              />
+            </Form.Group>
           </div>
-        </form>
-      </Item>
+          <div>
+            <Form.Group className="mb-1" controlId="formBasicEmail">
+              <Form.Label>Date</Form.Label>
+              <Form.Control
+                type="date"
+                value={enteredDate}
+                onChange={dateHandler}
+                min="2020-01-01"
+                max="2023-01-01"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-1" controlId="formBasicEmail">
+              <Form.Label>Type</Form.Label>
+              <Form.Select
+                aria-label="Default select example"
+                value={enteredType}
+                onChange={typeHandler}
+                disabled={isEditing}
+              >
+                <option value="0">Select an option</option>
+                <option value="1">Income</option>
+                <option value="2">Expense</option>
+              </Form.Select>
+            </Form.Group>
+          </div>
+        </div>
+
+        <div className="formButton">
+          {!isEditing && (
+            <Button variant="primary" type="button" onClick={clearHandler}>
+              Clear
+            </Button>
+          )}
+          <Button variant="primary" type="submit" disabled={!isFormReady}>
+            Save
+          </Button>
+        </div>
+      </Form>
     </div>
   );
 };

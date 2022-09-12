@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import OperationForm from "./Form/OperationForm";
 import OperationsList from "./List/OperationList";
 import OperationsFilters from "./Filter/OperationFilter";
-import SectionTitle from "../Title/Title";
+import Title from "../Title/Title";
 import {
   addNewOperation,
   getAllOperations,
@@ -71,11 +71,8 @@ const Operations = () => {
 
   return (
     <>
-      <OperationForm
-        onSaveOperation={addOperationHandler}
-        title="Add Operation"
-      />
-      <SectionTitle>All operations</SectionTitle>
+      <OperationForm onSaveOperation={addOperationHandler} />
+      <Title>All operations</Title>
       <OperationsFilters
         onShowExpenses={showExpenses}
         onShowIncomes={showIncomes}
