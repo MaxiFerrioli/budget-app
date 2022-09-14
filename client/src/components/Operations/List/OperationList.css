@@ -1,5 +1,14 @@
-.containerAllOp {
+.items {
+  margin: auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.items td {
+  padding: 40px 0px;
+}
+
+.items .deleteEdit {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
 }

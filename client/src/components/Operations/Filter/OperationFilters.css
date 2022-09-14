@@ -1,0 +1,12 @@
+.containerFilters {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
