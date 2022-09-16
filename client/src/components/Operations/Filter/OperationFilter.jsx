@@ -1,4 +1,5 @@
-import Button from "react-bootstrap/esm/Button";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import "./OperationFilters.css";
 
 const OperationsFilters = ({
@@ -9,11 +10,15 @@ const OperationsFilters = ({
   return (
     <div className="containerFilters">
       <h2 className="title">ALL OPERATIONS</h2>
-      <div className="filters">
-        <Button onClick={onShowIncomes}>Incomes</Button>
-        <Button onClick={onShowExpenses}>Expenses</Button>
-        <Button onClick={onClearFilter}>All</Button>
-      </div>
+      <ToggleButtonGroup
+        type="checkbox"
+        variant="outline-primary"
+        className="filters"
+      >
+        <ToggleButton onClick={onShowIncomes}>Incomes</ToggleButton>
+        <ToggleButton onClick={onShowExpenses}>Expenses</ToggleButton>
+        <ToggleButton onClick={onClearFilter}>All</ToggleButton>
+      </ToggleButtonGroup>
     </div>
   );
 };

@@ -5,10 +5,11 @@ import {
 } from "../../services/services";
 import OperationsBalance from "./Balance/OperationsBalance";
 import OperationsList from "../Operations/List/OperationList";
-import Title from "../Title/Title";
 
 const Home = () => {
   const [balance, setBalance] = useState();
+  const [expenses, setTotalExpenses] = useState();
+  const [incomes, setTotalIncomes] = useState();
   const [operations, setOperations] = useState([]);
   const operationsQuantity = 10;
 
@@ -22,19 +23,25 @@ const Home = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-  
+
   useEffect(() => {
     getOperationsBalance()
       .then(({ data }) => {
         setBalance(data.total);
+        setTotalExpenses(data.totalExpenses);
+        setTotalIncomes(data.totalIncomes);
       })
       .catch((error) => console.log(error));
   }, []);
 
   return (
     <>
-      <OperationsBalance balance={balance} />
-      <Title>Last {operationsQuantity} operations</Title>
+      <OperationsBalance
+        balance={balance}
+        expenses={expenses}
+        incomes={incomes}
+      />
+      <h2 className="text-center mb-4">Last {operationsQuantity} operations</h2>
       <OperationsList operations={operations} />
     </>
   );
