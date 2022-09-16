@@ -117,8 +117,13 @@ exports.getOperationsBalance = async (req, res, next) => {
       raw: true,
     });
     const balance = incomes[0].total - expenses[0].total;
+    const totalIncomes = incomes[0].total;
+    const totalExpenses = expenses[0].total;
+
     res.status(200).json({
       total: balance,
+      totalIncomes: totalIncomes,
+      totalExpenses: totalExpenses,
       message: "Fetched balance successfuly",
     });
   } catch (err) {

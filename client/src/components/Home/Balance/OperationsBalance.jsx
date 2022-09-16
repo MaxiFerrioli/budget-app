@@ -1,10 +1,13 @@
-import Item from "../../Item/Item";
-
-const OperationsBalance = ({ balance }) => {
+const OperationsBalance = ({ balance, expenses, incomes }) => {
   return (
-    <Item title="Balance">
+    <>
+      <span>Money incomes</span>
+      <div>${incomes}</div>
+      <span>Money expenses</span>
+      <div>${expenses}</div>
+      <span>Total balance</span>
       <div>${balance}</div>
-    </Item>
+    </>
   );
 };
 
