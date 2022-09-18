@@ -9,7 +9,7 @@ const OperationsFilters = ({
 }) => {
   return (
     <div className="containerFilters">
-      <h2 className="title">ALL OPERATIONS</h2>
+      <h2 className="titleOperations">All operations</h2>
       <ToggleButtonGroup
         type="checkbox"
         variant="outline-primary"

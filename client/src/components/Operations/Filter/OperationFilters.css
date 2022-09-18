@@ -10,3 +10,9 @@
   margin: auto;
   margin-bottom: 20px;
 }
+
+@media (max-width: 400px) {
+  .filters {
+    width: auto;
+  }
+}

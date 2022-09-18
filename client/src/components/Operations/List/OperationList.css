@@ -4,11 +4,24 @@
   text-align: center;
 }
 
-.items td {
-  padding: 40px 0px;
+.items thead th {
+  min-width: 90px;
 }
 
-.items .deleteEdit {
+.items tbody td {
+  padding: 50px 0px;
+}
+
+.items tbody .deleteEdit {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+}
+
+.iconDelete {
+  color: red;
+}
+
+.emptyOp {
+  text-align: center;
+  margin: 20px;
 }

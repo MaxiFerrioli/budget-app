@@ -7,6 +7,7 @@ import {
   getAllOperations,
   deleteOperation,
 } from "../../services/services";
+import Swal from "sweetalert2";
 
 const Operations = () => {
   const [operations, setOperations] = useState([]);
@@ -51,6 +52,7 @@ const Operations = () => {
           const newOperations = [...prevOperations];
           newOperations.splice(deletedIndex, 1);
           setOperations(newOperations);
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
         });
       })
       .catch((error) => console.log(error));

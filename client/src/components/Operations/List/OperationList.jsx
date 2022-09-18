@@ -24,11 +24,11 @@ const OperationsList = ({
     <>
       {operations.length === 0 ? (
         <div className="emptyOp">
-          <h2>NO HAY OPERACIONES</h2>
+          <h2>You did not register any movement</h2>
         </div>
       ) : (
         <div>
-          <Table striped bordered hover className="items">
+          <Table responsive="xl" bordered striped className="items">
             <thead>
               <tr>
                 <th>Concept</th>
@@ -37,26 +37,28 @@ const OperationsList = ({
                 <th>Type</th>
               </tr>
             </thead>
-            {operations.map((operation) => (
-              <tr key={operation.id}>
-                <td>{operation.concept}</td>
-                <td>${operation.amount}</td>
-                <td>{moment(operation.date).format("DD/MM/YYYY")}</td>
-                <td>{getTypeName(operation.type_id)}</td>
-                {showActions && (
-                  <td className="deleteEdit">
-                    <Link to={`/operation/edit/${operation.id}`}>
-                      <FiEdit />
-                    </Link>
-                    <div>
-                      <BsTrash
-                        onClick={() => onDeleteOperation(operation.id)}
-                      />
-                    </div>
-                  </td>
-                )}
-              </tr>
-            ))}
+            <tbody>
+              {operations.map((operation) => (
+                <tr key={operation.id}>
+                  <td>{operation.concept}</td>
+                  <td>${operation.amount}</td>
+                  <td>{moment(operation.date).format("DD/MM/YYYY")}</td>
+                  <td>{getTypeName(operation.type_id)}</td>
+                  {showActions && (
+                    <td className="deleteEdit">
+                      <Link to={`/operation/edit/${operation.id}`}>
+                        <FiEdit />
+                      </Link>
+                      <div className="iconDelete">
+                        <BsTrash
+                          onClick={() => onDeleteOperation(operation.id)}
+                        />
+                      </div>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
           </Table>
         </div>
       )}

@@ -5,6 +5,7 @@ import {
 } from "../../services/services";
 import OperationsBalance from "./Balance/OperationsBalance";
 import OperationsList from "../Operations/List/OperationList";
+import "./Home.css";
 
 const Home = () => {
   const [balance, setBalance] = useState();
@@ -36,12 +37,14 @@ const Home = () => {
 
   return (
     <>
+      <h1 className="titleHome">Balance sheet of money</h1>
       <OperationsBalance
+        operations={operations}
         balance={balance}
         expenses={expenses}
         incomes={incomes}
       />
-      <h2 className="text-center mb-4">Last {operationsQuantity} operations</h2>
+      <h2 className="titleHome">Last {operationsQuantity} operations</h2>
       <OperationsList operations={operations} />
     </>
   );

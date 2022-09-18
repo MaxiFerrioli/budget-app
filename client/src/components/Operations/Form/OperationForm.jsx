@@ -75,7 +75,7 @@ const OperationForm = ({ onSaveOperation, operation = null }) => {
 
   return (
     <div>
-      <h2 className="title">ADD OPERATIONS</h2>
+      <h2 className="titleOperations">Add operations</h2>
       <Form onSubmit={submitHandler} className="containerForm">
         <div className="Form">
           <div>
